@@ -46,15 +46,13 @@ export default ({ children, location }) => (
 
       if (location.pathname === rootPath || location.pathname === postsPath) {
         header = (
-          <BackgroundImage
-            Tag="div"
+          <div
             className="post-hero"
-            fluid={homgePageHero}
-            backgroundColor={`#007ACC`}
             style={{
-              height: rhythm(14),
+              height: rhythm(7),
               position: 'relative',
               marginBottom: `${rhythm(1.5)}`,
+              backgroundColor: '#1e1e1e'
             }}
           >
             <h1
@@ -64,9 +62,10 @@ export default ({ children, location }) => (
                 textAlign: 'center',
                 left: 0,
                 right: 0,
-                top: rhythm(4),
+                top: rhythm(2),
                 marginTop: '0',
                 height: rhythm(2.5),
+                color: '#ffffff'
               }}
             >
               <Link
@@ -80,7 +79,7 @@ export default ({ children, location }) => (
                 {siteTitle}
               </Link>
             </h1>
-          </BackgroundImage>
+          </div>
         )
       } else {
         header = (
