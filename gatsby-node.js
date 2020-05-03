@@ -2,7 +2,6 @@ const each = require('lodash/each')
 const Promise = require('bluebird')
 const path = require('path')
 const Remarkable = require('remarkable').Remarkable
-const hljs = require('highlight.js')
 const prism = require('prismjs')
 const loadLanguages = require('prismjs/components/');
 
