@@ -1,6 +1,40 @@
 const each = require('lodash/each')
 const Promise = require('bluebird')
 const path = require('path')
+const Remarkable = require('remarkable').Remarkable
+const hljs = require('highlight.js')
+const prism = require('prismjs')
+const loadLanguages = require('prismjs/components/');
+
+const md = new Remarkable({
+  langPrefix:   'language-',
+  highlight: (str, lang) => {
+    lang = lang.toLowerCase()
+    if (lang && !prism.languages[lang]) {
+      try {
+        loadLanguages([lang])
+      }
+      catch (err) { }
+    }
+    if (lang && prism.languages[lang]) {
+      try {
+        return prism.highlight(str, prism.languages[lang], lang)
+      } catch (err) {}
+    }
+ 
+    return '' // use external default escaping
+  }
+})
+
+
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === 'CosmicjsPosts') {
+    const html = md.render(node.metadata.content_markdown)
+    createNodeField({node, name: 'content_markdown', value: html.replace('<pre>', '<pre class="language-">')})
+  }
+}
+
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions

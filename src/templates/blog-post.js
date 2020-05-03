@@ -77,7 +77,7 @@ class BlogPostTemplate extends React.Component {
         />
         <div
           className="post-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post.fields.content_markdown }}
         />
         <hr
           style={{
@@ -125,6 +125,9 @@ export const pageQuery = graphql`
       content
       title
       created(formatString: "MMMM DD, YYYY")
+      fields {
+        content_markdown
+      }
       metadata {
         hero {
           local {
